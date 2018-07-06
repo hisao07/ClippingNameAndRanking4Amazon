@@ -5,6 +5,7 @@
   "version": "1.0",
  
   "description": "Copy product name and ranking to clipboard on amazon.co.jp .",
+  "homepage_url": "https://github.com/hisao07/ClippingNameAndRanking4Amazon",
   
   "icons": {
     "48": "icons/icon.svg",
@@ -22,7 +23,16 @@
   "content_scripts": [
     {
       "matches": ["*://*.amazon.co.jp/*"],
-      "js": ["cnar.js"]
+      "js": ["jq/jquery-3.3.1.slim.min.js", "cnar.js"]
     }
-  ]
+  ],
+
+  "permissions": [
+    "activeTab",
+    "clipboardWrite"
+  ],
+
+  "background": {
+    "scripts": ["background.js"]
+  }
 }
