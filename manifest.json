@@ -11,6 +11,14 @@
     "96": "icons/icon.svg"
   },
 
+  "browser_action": {
+    "default_icon": {
+    "19": "icons/icon.svg",
+    "38": "icons/icon.svg"
+    },
+    "default_title": "Clipping name & rancking"
+  },
+
   "content_scripts": [
     {
       "matches": ["*://*.amazon.co.jp/*"],
