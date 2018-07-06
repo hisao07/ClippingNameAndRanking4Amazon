@@ -1,0 +1,20 @@
+{
+
+  "manifest_version": 2,
+  "name": "ClippingNameAndRanking",
+  "version": "1.0",
+ 
+  "description": "Copy product name and ranking to clipboard on amazon.co.jp .",
+  
+  "icons": {
+    "48": "icons/icon.svg",
+    "96": "icons/icon.svg"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.amazon.co.jp/*"],
+      "js": ["cnar.js"]
+    }
+  ]
+}
