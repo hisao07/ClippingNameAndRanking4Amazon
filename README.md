@@ -10,7 +10,7 @@ It's open-source and distributed under the Apache license version 2.0.
 ## Operation
 1. Open product page of amazon.co.jp.
 2. Click icon.  
-![icon](icon/icon.svg)
+![icon](icons/icon.svg)
 
 Copies information to clipboard.
 
