@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "ClippingNameAndRanking",
-  "version": "1.0",
+  "version": "0.1.0",
  
   "description": "Copy product name and ranking to clipboard on amazon.co.jp .",
   "homepage_url": "https://github.com/hisao07/ClippingNameAndRanking4Amazon",
