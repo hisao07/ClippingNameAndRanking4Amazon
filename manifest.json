@@ -23,16 +23,25 @@
   "content_scripts": [
     {
       "matches": ["*://*.amazon.co.jp/*"],
-      "js": ["jq/jquery-3.3.1.slim.min.js", "cnar.js"]
+      "js": ["cnar.js"]
     }
   ],
 
   "permissions": [
     "activeTab",
-    "clipboardWrite"
+    "clipboardWrite",
+    "notifications"
   ],
 
   "background": {
     "scripts": ["background.js"]
+  },
+
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y"
+      }
+    }
   }
 }

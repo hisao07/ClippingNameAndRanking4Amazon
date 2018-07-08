@@ -1,24 +1,34 @@
-(($) => {
-  // marking target
-  // const productTitle = document.getElementById("productTitle");
-  const productTitle = $("#productTitle");
-  productTitle.css("border", "5px solid yellow");
-  // const salesRank = document.getElementById("SalesRank");
-  const salesRank = $("#SalesRank");
-  salesRank.css("border", "5px solid yellow");
+/*
+   Copyright 2018 Hisao Oshita
+  
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
 
-  // clipping data
-  function parseSalesRank(salesRank) {
-    var ret =  salesRank.match(/売れ筋ランキング:?\s+(.+)\s\(/);
-    return ret[1];
-  }
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+ */
+(($) => {
+  "use strict"
+  // marking target
+  const productTitle = document.getElementById("productTitle");
+  productTitle.style = "border: 5px solid yellow";
+  const salesRank = document.getElementById("SalesRank");
+  salesRank.style = "border: 5px solid yellow";
 
   browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    const product = productTitle.text().trim();
-    console.log(product);
-    const ranking = parseSalesRank(salesRank.text().trim());
-    console.log(ranking);
-    window.prompt("見つかったよ。", product + "/" + ranking);
+    const response = {
+      product: productTitle.textContent,
+      ranking: salesRank.textContent
+    };
+    console.log(response);
+    // window.prompt("見つかったよ。", product + "/" + ranking_);
+    sendResponse(response);
   });
 
-})(jQuery);
+})();
