@@ -15,20 +15,27 @@
  */
 (($) => {
   "use strict"
-  // marking target
-  const productTitle = document.getElementById("productTitle");
-  productTitle.style = "border: 5px solid yellow";
-  const salesRank = document.getElementById("SalesRank");
-  salesRank.style = "border: 5px solid yellow";
 
-  browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    const response = {
+  // check null or undefined
+  function isNullOrUndefined(o) {
+    return o === undefined || o === null;
+  }
+
+  // Get target
+  const productTitle = document.getElementById("productTitle");
+  const salesRank = document.getElementById("SalesRank");
+
+  // Mark targer
+  if (!isNullOrUndefined(productTitle))
+    productTitle.style = "border: 5px solid yellow";
+  if (!isNullOrUndefined(salesRank))
+    salesRank.style = "border: 5px solid yellow";
+
+  // Regist message listener
+  browser.runtime.onMessage.addListener((request, sender, sendResponse) =>
+    Promise.resolve({
       product: productTitle.textContent,
       ranking: salesRank.textContent
-    };
-    console.log(response);
-    // window.prompt("見つかったよ。", product + "/" + ranking_);
-    sendResponse(response);
-  });
+    }));
 
 })();

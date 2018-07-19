@@ -15,6 +15,8 @@
  */
 (() => {
   "use strict"
+
+  // copy to clipboard
   function copyToClipboard(format, text) {
     const CMD_COPY = "copy";
     function oncopy(event) {
@@ -32,25 +34,31 @@
     document.execCommand(CMD_COPY);
   }
 
-  function onError(error) {
-    console.error(`Error: ${error}`);
-  }
-
   // clipping data
   function parseSalesRank(salesRank) {
     var ret =  salesRank.match(/売れ筋ランキング:?\s+(.+)\s\(/);
     return ret[1];
   }
 
-  function formatMessage(res) {
-    return `${res.product.trim()}\n${parseSalesRank(res.ranking)}`;
+  // on error
+  function onError(error) {
+    const msg = `${error}`;
+    console.error(msg);
+    browser.notifications.create({
+      "type": "basic",
+      "iconUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5f/Icon_Simple_Error.png",
+      "title": "Opps!!",
+      "message": msg,
+    });
   }
 
+  // send message
   function messageTab(tabs) {
     browser.tabs.sendMessage(tabs[0].id, {
       replacement: "Message from the extension!"
-    }).then(res => {
-      const msg = formatMessage(res);
+    }).then(res =>
+      `${res.product.trim()}\n${parseSalesRank(res.ranking)}`
+    ).then(msg => {
       console.log(msg);
       copyToClipboard("text/plain", msg);
       browser.notifications.create({
@@ -62,11 +70,11 @@
     }).catch(onError);
   }
   
-  browser.browserAction.onClicked.addListener((tab) => {
-    var querying = browser.tabs.query({
+  browser.browserAction.onClicked.addListener(tab => {
+    browser.tabs.query({
         active: true,
         currentWindow: true
-    });
-    querying.then(messageTab).catch(onError);
+    }).then(messageTab)
+      .catch(onError);
   });
 })();
